@@ -1,4 +1,4 @@
-name: CI
+name: Compile for C and C++
 on: [push]
 jobs:
   build:
