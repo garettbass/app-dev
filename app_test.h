@@ -1,4 +1,4 @@
-///usr/bin/env sh $(dirname $0)/appcc.sh -std=c11 "$0" "$@"; exit $?
+///usr/bin/env sh $(dirname $0)/appcc.sh -std=c11 -x c "$0" "$@"; exit $?
 #include "app/app.inl"
 #include "echo.h"
 

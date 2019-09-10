@@ -48,7 +48,7 @@ fi
 
 #-------------------------------------------------------------------------------
 
-CFLAGS="${CFLAGS:=-std=c11 -Werror -Wno-comment}"
+CFLAGS="${CFLAGS:=-Werror}"
 
 #-------------------------------------------------------------------------------
 
@@ -63,8 +63,13 @@ while [ $# -gt 0 ]; do
             CFLAGS="$CFLAGS -D_DEBUG=1 $1"
             shift
         ;;
-        -O*)
+        -D*|-O*|-std=*)
             CFLAGS="$CFLAGS $1"
+            shift
+        ;;
+        -x)
+            CFLAGS="$CFLAGS $1 $2"
+            shift
             shift
         ;;
         -t)
@@ -73,10 +78,16 @@ while [ $# -gt 0 ]; do
         ;;
         -v)
             VERBOSE=YES
+            CFLAGS="$CFLAGS -DVERBOSE=1"
+            shift
+        ;;
+        --clean)
+            CLEAN=YES
             shift
         ;;
         --)
             RUN=YES
+            CLEAN=YES
             shift
             break
         ;;
@@ -139,14 +150,15 @@ if [ $RUN ]; then
     verbose "$BIN" "$@"
     "$BIN" "$@"
     STATUS=$?
+    echo $''
+    echo "$BIN" returned "$STATUS"
+fi
 
+if [ $CLEAN ]; then
     rm -f  "${BIN}"
     rm -f  "${BIN%.*}.ilk"
     rm -f  "${BIN%.*}.pdb"
     rm -rf "${APP_ROOT}/app.app/Contents/MacOS/app.dSYM"
-
-    echo $''
-    echo "$BIN" returned "$STATUS"
 fi
 
 #-------------------------------------------------------------------------------
