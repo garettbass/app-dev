@@ -1,4 +1,4 @@
-name: CI
+name: test compilation of garettbass/app for C and C++
 on: [push]
 jobs:
   build:
