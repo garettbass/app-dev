@@ -1,0 +1,47 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "cdb",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "preLaunchTask": "appcc-clang",
+            "cwd": "${fileDirname}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "stopAtEntry": false,
+            "externalConsole": false
+        },
+        {
+            "name": "gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "appcc-gcc",
+            "cwd": "${fileDirname}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\git-sdk-64\\usr\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "lldb",
+            "type": "lldb-mi",
+            "preLaunchTask": "appcc-gcc",
+            "request": "launch",
+            "cwd": "${fileDirname}",
+            "target": "${fileDirname}/${fileBasenameNoExtension}.exe",,
+            "valuesFormatting": "parseText",
+            "lldbmipath": "C:\\Users\\gbass\\scoop\\shims\\lldb-mi.exe"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "appcc-gcc",
+			"type": "shell",
+			"command": "CC=gcc sh appcc.sh '${file}' -g -v",
+			"problemMatcher": [ "$gcc" ]
+		},
+		{
+			"label": "appcc-clang",
+			"type": "shell",
+			"command": "CC=clang sh appcc.sh '${file}' -g -v",
+			"problemMatcher": [ "$gcc" ]
+		}
+	]
+}
