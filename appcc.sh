@@ -1,5 +1,7 @@
 #!/usr/bin/env
 
+CMDLINE="$0 $@"
+
 #-------------------------------------------------------------------------------
 
 function usage {
@@ -31,6 +33,19 @@ function execute {
         time "$@"
     else
         "$@"
+    fi
+}
+
+#-------------------------------------------------------------------------------
+
+function realpath {
+    local path="${1//\\//}"
+    if [ "$path" == "." ]; then
+        echo "$(pwd)"
+    elif [ "$path" == ".." ]; then
+        echo "$(dirname "$(pwd)")"
+    else
+        echo "$(cd "$(dirname "$path")"; pwd)/$(basename "$path")"
     fi
 }
 
@@ -98,7 +113,8 @@ while [ $# -gt 0 ]; do
             exit 1
         ;;
         *)
-            SOURCES+=("${1//\\//}")
+            SOURCE="$(realpath $1)"
+            SOURCES+=("$SOURCE")
             shift
         ;;
     esac
@@ -108,6 +124,10 @@ if [ ! $SOURCES ]; then
     usage
     exit 1
 fi
+
+#-------------------------------------------------------------------------------
+
+verbose "$CMDLINE"
 
 #-------------------------------------------------------------------------------
 
