@@ -2,7 +2,10 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v1
       with:
