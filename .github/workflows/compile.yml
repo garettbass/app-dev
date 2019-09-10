@@ -1,4 +1,4 @@
-name: test compilation of garettbass/app for C and C++
+name: CI
 on: [push]
 jobs:
   build:
@@ -12,6 +12,6 @@ jobs:
         ref: master
         submodules: true
     - name: compile for C
-      run: sh -c 'CC=gcc sh app.c -v'
+      run: sh app.c -v
     - name: compile for C++
-      run: sh -c 'CC=gcc sh app.cpp -v'
+      run: sh app.cpp -v
