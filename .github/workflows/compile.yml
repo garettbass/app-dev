@@ -5,5 +5,10 @@ jobs:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
+      with:
+        ref: master
+        submodules: true
+    - name: compile for C
       run: sh app.c -v
+    - name: compile for C++
+      run: sh app.cpp -v
