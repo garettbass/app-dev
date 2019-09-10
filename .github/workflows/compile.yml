@@ -12,6 +12,6 @@ jobs:
         ref: master
         submodules: true
     - name: compile for C
-      run: sh app.c -v
+      run: CC=clang sh app.c -v
     - name: compile for C++
-      run: sh app.cpp -v
+      run: CC=clang sh app.cpp -v
